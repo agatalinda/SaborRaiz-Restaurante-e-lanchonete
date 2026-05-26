@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hambúrguer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> Menu de Hambúrguer 🍔</h1>
+<div class="menu">
+  <!-- Coluna 1 -->
+  <div class="coluna">
+    <h2>Hambúrgueres</h2>
+    <label><input type="checkbox" name="burger" value="Clássico" data-preco="25"> Clássico (carne, queijo, pão, bacon crocante) - R$ 25,00</label>
+    <label><input type="checkbox" name="burger" value="X-Bacon" data-preco="35"> X-Bacon (queijo, bacon crocante, presunto, alface e tomate) - R$ 35,00</label>
+    <label><input type="checkbox" name="burger" value="Moda da Casa" data-preco="35"> Moda da Casa (mussarela, milho, calabresa, cebola, tomate, alface) - R$ 35,00</label>
+  </div>
+
+  <!-- Coluna 2 -->
+  <div class="coluna">
+    <h2>Combos</h2>
+    <label><input type="checkbox" name="burger" value="Calabresa M" data-preco="50"> Combo Calabresa M (hambúrguer + batata + coca 500ml) - R$ 50,00</label>
+    <label><input type="checkbox" name="burger" value="Burger de Costela" data-preco="50"> Burger de Costela (carne, ovo, bacon, parmesão empanado, molho de alho, geleia de pimenta + batata + coca 500ml) - R$ 50,00</label>
+    <label><input type="checkbox" name="burger" value="Italiano" data-preco="50"> Italiano (muçarela, pesto, tomate seco + batata + coca 500ml) - R$ 50,00</label>
+  </div>
+</div>
+
+
+<!-- Adicionais -->
+<div class="extras">
+  <h2>Adicionais (+ R$ 2,00 cada)</h2>
+
+  <label>
+    <input type="checkbox" value="Queijo Extra" data-preco="2">
+    <img src="imagens/queijo.jpg" alt="Queijo Extra"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Bacon Extra" data-preco="2">
+    <img src="imagens/bacon.jpg" alt="Bacon Extra"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Molho Especial" data-preco="2">
+    <img src="imagens/molho.jpg" alt="Molho Especial"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Ovo" data-preco="2">
+    <img src="imagens/ovo.jpg" alt="Ovo"> 
+  </label>
+</div>
+
+<!-- Quantidade e Total -->
+<div class="pedido">
+  <label>Quantidade: <input type="number" id="quantidade" value="1" min="1"></label>
+  <p>Total: R$ <span id="total">0</span></p>
+  <button id="enviar">Enviar Compra</button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        total += parseFloat(chk.dataset.preco);
+        quantidade++;
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+  });
+});
+</script>
+
+<!--codigo novo-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    // Salva no LocalStorage sempre que atualizar
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+    // Redireciona para o carrinho
+    window.location.href = "carrinho.html";
+  });
+});
+</script>
+</body>
+</html>
