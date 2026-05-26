@@ -1,0 +1,36 @@
+/*inicio*/ body.inicio {
+  background-color: #a0522d; /* fundo marrom */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.imagem-inicio {
+  width: 400px;              /* tamanho da imagem */
+  border-radius: 10px;       /* cantos arredondados */
+  border: 3px solid purple;  /* borda roxa */
+  margin-bottom: 70px;  
+  align-items: center;    /* centraliza horizontalmente */
+  margin-bottom: 20px;  /* espaço entre imagem e botão */
+}
+
+button.caixa-inicio {
+  background-color: #ff4500; /* laranja */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  
+}
+
+button.caixa-inicio:hover {
+  background-color: #e03e00; /* efeito hover */
+  align-items: center;
+  
+
+}
