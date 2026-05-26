@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - Lanche Raiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="fundo-marrom">
+  <form id="caixa-cadastro" class="caixa-cadastro">
+    <h1 class="titulo-laranja">Cadastro</h1>
+    <p>Digite seus dados pessoais</p>
+
+    <label for="nome">Nome completo</label>
+    <input id="nome" type="text" placeholder="Ex.: Maria Joaquina" required minlength="3" >
+
+    <label for="cpf">CPF</label>
+    <input id="cpf" type="text" placeholder="Ex.: 12345678901" required pattern="\d{11}" title="Digite exatamente 11 números">
+
+    <label for="bairro">Bairro</label>
+    <input id="bairro" type="text" placeholder="Ex.: Centro"  required minlength="3" >
+
+    <label for="rua">Rua</label>
+    <input id="rua" type="text" placeholder="Ex.: Rua das Flores" required minlength="3" >
+      
+
+    <label for="numeroCasa">Número da casa</label>
+    <input id="numeroCasa" type="text" placeholder="Ex.: 123" required minlength="1">
+
+    <label for="telefone">Telefone</label>
+    <input id="telefone" type="text" placeholder="Ex.: 65991234567" required required minlength="11">
+
+    <label for="email">E-mail</label>
+    <input id="email" type="email" placeholder="Ex.: nome@mael.com" required>
+
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" placeholder="Mínimo 6 caracteres" required minlength="6">
+
+
+    <button type="submit" id="btnEnviar" class="btn-verde" onclick="window.location='home.html'">Salvar</button>
+    <button type="button" id="btnCancelar" class="btn-vermelho" onclick="window.location='login.html'">Cancelar</button>
+  </form>
+
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  
+
+  <!-- Script de validação -->
+  <script src="script.js"></script>
+</body>
+</html>
