@@ -43,15 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Validações (mantive as suas regras)
     if (!/^[A-Z][a-z]+(\s[A-Z][a-z]+)+$/.test(nome)) {
-      alert("⚠️ Nome inválido. Ex.: Ana Caroline Barbosa");
+      alert(" Nome inválido. Ex.: Ana Caroline Barbosa");
       return;
     }
     if (!/^\d{11}$/.test(cpf)) {
-      alert("⚠️ CPF inválido. Deve ter 11 números.");
+      alert(" CPF inválido. Deve ter 11 números.");
       return;
     }
     if (senha.length < 6) {
-      alert("⚠️ Senha deve ter pelo menos 6 caracteres.");
+      alert(" Senha deve ter pelo menos 6 caracteres.");
       return;
     }
 
@@ -64,10 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
         criadoEm: serverTimestamp()
       });
 
-      alert("✅ Cadastro realizado!");
+      alert(" Cadastro realizado!");
       window.location.href = "home.html";
     } catch (error) {
-      alert("❌ Erro: " + error.message);
+      alert(" Erro: " + error.message);
     }
   });
 
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   atualizarPedido();
 
   document.getElementById("enviar").addEventListener("click", () => {
-    alert(`✅ Pedido enviado!\nQuantidade: ${quantidadeInput.value}\nTotal: R$ ${totalSpan.textContent}`);
+    alert(` Pedido enviado!\nQuantidade: ${quantidadeInput.value}\nTotal: R$ ${totalSpan.textContent}`);
     window.location.href = "carrinho.html";
   });
 });
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     await addDoc(collection(db, "pedidos"), pedidoData);
-    alert("✅ Pedido confirmado!");
+    alert(" Pedido confirmado!");
   });
 });
 
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
   atualizarPedido();
 
   document.getElementById("enviar").addEventListener("click", () => {
-    alert(`✅ Pedido enviado!\nQuantidade: ${quantidadeInput.value}\nTotal: R$ ${totalSpan.textContent}`);
+    alert(` Pedido enviado!\nQuantidade: ${quantidadeInput.value}\nTotal: R$ ${totalSpan.textContent}`);
     window.location.href = "carrinho.html";
   });
 });
