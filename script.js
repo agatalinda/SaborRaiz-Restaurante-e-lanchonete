@@ -79,3 +79,127 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+//pizza//
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => chk.addEventListener("change", atualizarPedido));
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert(`✅ Pedido enviado!\nQuantidade: ${quantidadeInput.value}\nTotal: R$ ${totalSpan.textContent}`);
+    window.location.href = "carrinho.html";
+  });
+});
+ 
+//carrinho//
+import { db } from "./firebase.js";
+import { collection, addDoc } from "firebase/firestore";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const lista = document.getElementById("lista-itens");
+  const valorTotal = document.getElementById("valor-total");
+
+  const pedido = JSON.parse(localStorage.getItem("pedido")) || [];
+  const total = localStorage.getItem("valorTotal") || "0.00";
+
+  pedido.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+    lista.appendChild(li);
+  });
+
+  valorTotal.textContent = total;
+
+  document.getElementById("confirmar").addEventListener("click", async () => {
+    const pedidoData = {
+      itens: pedido.map(p => p.nome),
+      valor: total,
+      pagamento: document.querySelector('input[name="pagamento"]:checked')?.value,
+      endereco: document.getElementById("endereco").value,
+      numero: document.getElementById("numero").value,
+      telefone: document.getElementById("telefone").value,
+      retirada: {
+        hora: document.getElementById("hora-retirada").value,
+        responsavel: document.getElementById("responsavel").value
+      }
+    };
+
+    await addDoc(collection(db, "pedidos"), pedidoData);
+    alert("✅ Pedido confirmado!");
+  });
+});
+
+//pizza//
+
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    // Salva no LocalStorage
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => chk.addEventListener("change", atualizarPedido));
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert(`✅ Pedido enviado!\nQuantidade: ${quantidadeInput.value}\nTotal: R$ ${totalSpan.textContent}`);
+    window.location.href = "carrinho.html";
+  });
+});
+
+document.querySelectorAll('input[name="pagamento"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    document.getElementById('pix-area').style.display = radio.value === 'pix' ? 'block' : 'none';
+    document.getElementById('dinheiro-area').style.display = radio.value === 'dinheiro' ? 'block' : 'none';
+  });
+});
+
+
+
