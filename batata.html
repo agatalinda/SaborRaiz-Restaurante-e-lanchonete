@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batata Frita</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> Menu de Batata Frita 🍟</h1>
+<div class="menu">
+  <!-- Coluna 1 -->
+  <div class="coluna">
+    <h2>Opções</h2>
+    <label><input type="checkbox" name="batata" value="Batata Simples" data-preco="10"> Batata Simples - R$ 10,00</label>
+    <label><input type="checkbox" name="batata" value="Batata Cheddar e Bacon" data-preco="20"> Batata Cheddar e Bacon - R$ 20,00</label>
+    <label><input type="checkbox" name="batata" value="Batata com Calabresa" data-preco="22"> Batata com Calabresa - R$ 22,00</label>
+  </div>
+
+  <!-- Coluna 2 -->
+  <div class="coluna">
+    <h2>Opções</h2>
+    <label><input type="checkbox" name="batata" value="Batata Turbinada" data-preco="28"> Batata Turbinada - R$ 28,00</label>
+    <label><input type="checkbox" name="batata" value="Batata Premium" data-preco="35"> Batata Premium - R$ 35,00</label>
+    <label><input type="checkbox" name="batata" value="Barca Família" data-preco="50"> Barca de Batata Família - R$ 50,00</label>
+  </div>
+</div>
+
+
+<!-- Adicionais -->
+<div class="extras">
+  <h2>Molhos (+ R$ 3,00 cada)</h2>
+
+  <label>
+    <input type="checkbox" value="Ketchup" data-preco="3">
+    <img src="imagens/tomate.jpg" alt="Ketchup"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Maionese" data-preco="3">
+    <img src="imagens/maionese.jpg" alt="Maionese"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Barbecue" data-preco="3">
+    <img src="imagens/barbecue.jpg" alt="Barbecue"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Mostarda" data-preco="3">
+    <img src="imagens/mostarda.jpg" alt="Mostarda"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Alho" data-preco="3">
+    <img src="imagens/alho.jpg" alt="Molho de Alho"> 
+  </label>
+</div>
+
+<!-- Quantidade e Total -->
+<div class="pedido">
+  <label>Quantidade: <input type="number" id="quantidade" value="1" min="1"></label>
+  <p>Total: R$ <span id="total">0</span></p>
+  <button id="enviar">Enviar Compra</button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        total += parseFloat(chk.dataset.preco);
+        quantidade++;
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+  });
+});
+</script>
+
+<!--codigo novo-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    // Salva no LocalStorage sempre que atualizar
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+    // Redireciona para o carrinho
+    window.location.href = "carrinho.html";
+  });
+});
+</script>
+</body>
+</html>
