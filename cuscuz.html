@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuscuz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> Menu de Cuscuz 🌽</h1>
+<div class="menu">
+  <!-- Coluna 1 -->
+  <div class="coluna">
+    <h2>Opções</h2>
+    <label><input type="checkbox" name="cuscuz" value="Cuscuz Simples" data-preco="6"> Cuscuz Simples (com manteiga) - R$ 6,00</label>
+    <label><input type="checkbox" name="cuscuz" value="Cuscuz com Queijo Coalho" data-preco="9"> Cuscuz com Queijo Coalho - R$ 9,00</label>
+    <label><input type="checkbox" name="cuscuz" value="Cuscuz com Carne Seca" data-preco="11"> Cuscuz com Carne Seca - R$ 11,00</label>
+    <label><input type="checkbox" name="cuscuz" value="Cuscuz com Frango" data-preco="11"> Cuscuz com Frango Desfiado - R$ 11,00</label>
+    <label><input type="checkbox" name="cuscuz" value="Cuscuz com Ovo" data-preco="11"> Cuscuz com Ovo e Manteiga - R$ 11,00</label>
+  </div>
+
+  <!-- Coluna 2 -->
+  <div class="coluna">
+    <h2>Opções Especiais</h2>
+    <label><input type="checkbox" name="cuscuz" value="Cuscuz Nordista" data-preco="14"> Cuscuz Nordista (carne seca, queijo coalho e manteiga de garrafa) - R$ 14,00</label>
+    <label><input type="checkbox" name="cuscuz" value="Cuscuz Completo" data-preco="14"> Cuscuz Completo (frango, ovo, queijo e calabresa) - R$ 14,00</label>
+    <label><input type="checkbox" name="cuscuz" value="Cuscuz Moda da Casa" data-preco="14"> Cuscuz Moda da Casa (frango, ovo, queijo, calabresa, catupiry, presunto) - R$ 14,00</label>
+    <label><input type="checkbox" name="cuscuz" value="Cuscuz Doce" data-preco="9"> Cuscuz Doce (coco ralado e leite condensado) - R$ 9,00</label>
+  </div>
+</div>
+
+
+<!-- Adicionais -->
+<div class="extras">
+  <h2>Adicionais (+ R$ 2,00 cada)</h2>
+
+  <label>
+    <input type="checkbox" value="Queijo" data-preco="2">
+    <img src="imagens/queijo.jpg" alt="Queijo"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Carne" data-preco="2">
+    <img src="imagens/carne.jpg" alt="Carne"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Ovo" data-preco="2">
+    <img src="imagens/ovo.jpg" alt="Ovo"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Manteiga" data-preco="2">
+    <img src="imagens/manteiga.jpg" alt="Manteiga"> 
+  </label>
+</div>
+
+<!-- Quantidade e Total -->
+<div class="pedido">
+  <label>Quantidade: <input type="number" id="quantidade" value="1" min="1"></label>
+  <p>Total: R$ <span id="total">0</span></p>
+  <button id="enviar" onclick="window.location.href='carrinho.html'">Enviar Compra</button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        total += parseFloat(chk.dataset.preco);
+        quantidade++;
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+  });
+});
+</script>
+
+<!--codigo novo-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    // Salva no LocalStorage sempre que atualizar
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+    // Redireciona para o carrinho
+    window.location.href = "carrinho.html";
+  });
+});
+</script>
+</body>
+</html>
