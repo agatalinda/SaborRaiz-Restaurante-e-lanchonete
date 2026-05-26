@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tapioca</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> Menu de Tapioca 🌮</h1>
+<div class="menu">
+  <!-- Coluna 1 -->
+  <div class="coluna">
+    <h2>Tradicionais</h2>
+    <label><input type="checkbox" name="tapioca" value="Tapioca Simples" data-preco="7"> Tapioca Simples (manteiga, queijo muçarela, coalho, minas, ovo, frango desfiado, banana com canela) — R$ 7,00</label>
+    
+    <label><input type="checkbox" name="tapioca" value="Tapioca Doce" data-preco="25"> Tapioca Doce (banana + canela + leite condensado, queijo minas + goiabada, Nutella + morango, coco ralado + leite condensado, doce de leite) — R$ 25,00</label>
+    
+    <label><input type="checkbox" name="tapioca" value="Moda da Casa" data-preco="35"> Moda da Casa (mussarela, milho, carne, calabresa, cebola, tomate, alface) — R$ 35,00</label>
+  </div>
+
+  <!-- Coluna 2 -->
+  <div class="coluna">
+    <h2>Combos</h2>
+    <label><input type="checkbox" name="tapioca" value="Combo Calabresa" data-preco="50"> Tapioca Combo Calabresa (queijo, calabresa, tomate, carne, pão e alface + batata + coca 500ml) — R$ 50,00</label>
+    
+    <label><input type="checkbox" name="tapioca" value="Tapioca Burger de Costela" data-preco="50"> Tapioca Burger de Costela (carne, ovo, bacon, parmesão empanado, molho de alho, geleia de pimenta + batata + coca 500ml) — R$ 50,00</label>
+    
+    <label><input type="checkbox" name="tapioca" value="Tapioca Italiano" data-preco="50"> Tapioca Italiano (muçarela, pesto, tomate seco, carne + batata + coca 500ml) — R$ 50,00</label>
+  </div>
+</div>
+
+<!-- Adicionais -->
+<div class="extras">
+  <h2>Adicionais (R$ 2,00 cada)</h2>
+
+  <label>
+    <input type="checkbox" value="Tomate" data-preco="2">
+    <img src="imagens/tomate.jpg"> Tomate — R$ 2,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Milho" data-preco="2">
+    <img src="imagens/milho.jpg" > Milho — R$ 2,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Carne" data-preco="2">
+    <img src="imagens/carne.jpg" > Carne — R$ 2,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Queijo" data-preco="2">
+    <img src="imagens/queijo.jpg" > Queijo — R$ 2,00
+  </label>
+</div>
+
+<!-- Quantidade e Total -->
+<div class="pedido">
+  <label>Quantidade: <input type="number" id="quantidade" value="1" min="1"></label>
+  <p>Total: R$ <span id="total">0</span></p>
+  <button id="enviar">Enviar Compra</button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        total += parseFloat(chk.dataset.preco);
+        quantidade++;
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+  });
+});
+</script>
+
+<!--codigo novo-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    // Salva no LocalStorage sempre que atualizar
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+    // Redireciona para o carrinho
+    window.location.href = "carrinho.html";
+  });
+});
+</script>
+</body>
+</html>
