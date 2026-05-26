@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Açaí </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> Menu de Açaí</h1>
+<div class="menu">
+  <!-- Coluna 1 -->
+  <div class="coluna">
+    <h2>Opções</h2>
+    <label><input type="checkbox" name="acai" value="Açaí Simples" data-preco="7"> Açaí Simples - R$ 7,00</label>
+    <label><input type="checkbox" name="acai" value="Açaí Nutelado" data-preco="25"> Açaí Nutelado - R$ 25,00</label>
+    <label><input type="checkbox" name="acai" value="Super Combo da Casa" data-preco="35"> Super Combo da Casa - R$ 35,00</label>
+  </div>
+
+  <!-- Coluna 2 -->
+  <div class="coluna">
+    <h2>Opções</h2>
+    <label><input type="checkbox" name="acai" value="Barca Família" data-preco="50"> Barca de Açaí Família - R$ 50,00</label>
+    <label><input type="checkbox" name="acai" value="Açaí Turbinado" data-preco="56"> Açaí Turbinado - R$ 56,00</label>
+    <label><input type="checkbox" name="acai" value="Açaí Premium" data-preco="60"> Açaí Premium (Trufado) - R$ 60,00</label>
+  </div>
+</div>
+
+
+<!-- Adicionais -->
+<div class="extras">
+  <h2>Adicionais (+ R$ 2,00 cada)</h2>
+
+  <label>
+    <input type="checkbox" value="Banana" data-preco="2">
+    <img src="imagens/bana.jpg" alt="Banana"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Nutella" data-preco="2">
+    <img src="imagens/nute.jpg" alt="Nutella"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Leite em pó" data-preco="2">
+    <img src="imagens/leite po.jpg" alt="Leite em pó"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Morango" data-preco="2">
+    <img src="imagens/morango-1519823853148_v2_750x421.jpg" alt="Morango"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Leite condensado" data-preco="2">
+    <img src="imagens/leite.jpg" alt="Leite condensado"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Chantilly" data-preco="2">
+    <img src="imagens/chanti.jpg" alt="Chantilly"> 
+  </label>
+</div>
+
+<!-- Quantidade e Total -->
+<div class="pedido">
+  <label>Quantidade: <input type="number" id="quantidade" value="1" min="1"></label>
+  <p>Total: R$ <span id="total">0</span></p>
+  <button id="enviar">Enviar Compra</button>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        total += parseFloat(chk.dataset.preco);
+        quantidade++;
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+  });
+});
+</script>
+
+<!--codigo novo-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    // Salva no LocalStorage sempre que atualizar
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+    // Redireciona para o carrinho
+    window.location.href = "carrinho.html";
+  });
+});
+</script>
+
+</body>
+</html>
