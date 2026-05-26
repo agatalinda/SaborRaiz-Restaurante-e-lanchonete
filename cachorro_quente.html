@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cachorro Quente</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> Menu de Cachorro Quente 🌭</h1>
+<div class="menu">
+  <!-- Coluna 1 -->
+  <div class="coluna">
+    <h2>Tradicionais</h2>
+    <label><input type="checkbox" name="dog" value="Simples" data-preco="8"> Cachorro Quente Simples (salsicha, molho, batata palha) — R$ 8,00</label>
+    
+    <label><input type="checkbox" name="dog" value="Cheddar e Bacon" data-preco="15"> Cachorro Quente Cheddar e Bacon — R$ 15,00</label>
+    
+    <label><input type="checkbox" name="dog" value="Calabresa" data-preco="14"> Cachorro Quente com Calabresa — R$ 14,00</label>
+    
+    <label><input type="checkbox" name="dog" value="Frango Desfiado" data-preco="14"> Cachorro Quente com Frango Desfiado — R$ 14,00</label>
+  </div>
+
+  <!-- Coluna 2 -->
+  <div class="coluna">
+    <h2>Especiais</h2>
+    <label><input type="checkbox" name="dog" value="Moda da Casa" data-preco="18"> Moda da Casa (salsicha, carne moída, queijo, ovo, presunto, molho especial) — R$ 18,00</label>
+    
+    <label><input type="checkbox" name="dog" value="Duplo" data-preco="20"> Cachorro Quente Duplo (duas salsichas, queijo, bacon, molho especial) — R$ 20,00</label>
+    
+    <label><input type="checkbox" name="dog" value="Barca Família" data-preco="35"> Barca Família (cachorro quente gigante + acompanhamentos) — R$ 35,00</label>
+  </div>
+</div>
+
+<!-- Adicionais -->
+<div class="extras">
+  <h2>Adicionais (R$ 2,00 cada)</h2>
+
+  <label>
+    <input type="checkbox" value="Queijo Extra" data-preco="2">
+    <img src="imagens/queijo.jpg" > Queijo Extra — R$ 2,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Bacon Extra" data-preco="2">
+    <img src="imagens/bacon.jpg"> Bacon Extra — R$ 2,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Molho Especial" data-preco="2">
+    <img src="imagens/molho.jpg" > Molho Especial — R$ 2,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Batata Palha" data-preco="2">
+    <img src="imagens/batatinha.jpg" > Batata Palha — R$ 2,00
+  </label>
+</div>
+
+<!-- Quantidade e Total -->
+<div class="pedido">
+  <label>Quantidade: <input type="number" id="quantidade" value="1" min="1"></label>
+  <p>Total: R$ <span id="total">0</span></p>
+  <button id="enviar">Enviar Compra</button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        total += parseFloat(chk.dataset.preco);
+        quantidade++;
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+  });
+});
+</script>
+
+<!--codigo novo-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    // Salva no LocalStorage sempre que atualizar
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+    // Redireciona para o carrinho
+    window.location.href = "carrinho.html";
+  });
+});
+</script>
+
+</body>
+</html>
