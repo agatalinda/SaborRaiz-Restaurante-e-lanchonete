@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acompanhar Pedido</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> Acompanhe seu Pedido</h1>
+
+  <div class="status">
+    
+    <button id="andamento">Em andamento</button>
+    <button id="cancelado">Cancelado</button>
+    <button id="concluido">Concluído</button>
+  </div>
+
+  <div class="pedido">
+    <h2>Itens do Pedido</h2>
+    <ul id="lista-itens"></ul>
+    <p>Valor Total: R$ <span id="valor-total">0</span></p>
+  </div>
+
+  <div class="pagamento">
+    <h2>Forma de Pagamento</h2>
+    <label><input type="radio" name="pagamento" value="pix"> Pix</label>
+    <label><input type="radio" name="pagamento" value="dinheiro"> Dinheiro</label>
+    <div id="pix-area" style="display:none;">
+      <p>QR Code Pix:</p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=chavepix@exemplo.com" alt="QR Pix">
+    </div>
+    <div id="dinheiro-area" style="display:none;">
+      <label>Digite o valor do troco:</label>
+      <input type="number" id="troco">
+    </div>
+  </div>
+
+  <div class="entrega">
+    <h2>Entrega</h2>
+    <input type="text" id="endereco" placeholder="Endereço">
+    <input type="text" id="numero" placeholder="Número da casa">
+    <input type="text" id="telefone" placeholder="Telefone">
+  </div>
+  
+
+  <div class="retirada">
+    <h2>Retirada</h2>
+    <input type="time" id="hora-retirada">
+    <input type="text" id="responsavel" placeholder="Responsável">
+  </div>
+
+ 
+
+ <button id="confirmar">Confirmar Pedido</button>
+
+
+<script>
+  document.getElementById("confirmar").addEventListener("click", function() {
+    alert("Seu pedido foi confirmado com sucesso!");
+    document.getElementById("status").textContent = "Status: Pedido confirmado e em preparação...";
+  });
+</script>
+
+
+  <script src="../firebase.js"></script>
+  <script src="script.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY&callback=initMap"></script>
+  <script>
+    // Lógica para mostrar/ocultar áreas de pagamento
+    document.querySelectorAll('input[name="pagamento"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.getElementById('pix-area').style.display = radio.value === 'pix' ? 'block' : 'none';
+        document.getElementById('dinheiro-area').style.display = radio.value === 'dinheiro' ? 'block' : 'none';
+        
+      });
+    });
+ 
+
+
+
+    // Lógica para status do pedido
+    document.getElementById('andamento').addEventListener('click', () => {  
+      alert('Seu pedido está em andamento!');
+    });
+
+    document.getElementById('cancelado').addEventListener('click', () => {  
+      alert('Seu pedido foi cancelado!');
+    });
+
+    document.getElementById('concluido').addEventListener('click', () => {  
+      alert('Seu pedido foi concluído!');
+    });
+
+    db.collection("pedidos")
+  .orderBy("data", "desc")
+  .limit(1)
+  .onSnapshot(snapshot => {
+    snapshot.forEach(doc => {
+      const pedido = doc.data();
+      document.getElementById("status").innerText = 
+        `Último pedido de ${pedido.cliente} — Forma de pagamento: ${pedido.pagamento}`;
+    });
+  });
+
+
+
+    
+  </script>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const lista = document.getElementById("lista-itens");
+    const valorTotal = document.getElementById("valor-total");
+
+    const pedido = JSON.parse(localStorage.getItem("pedido")) || [];
+    const total = localStorage.getItem("valorTotal") || 0;
+
+    pedido.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+      lista.appendChild(li);
+    });
+
+    valorTotal.textContent = total;
+  });
+</script>
+
+<!--codigo novo-->
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const lista = document.getElementById("lista-itens");
+  const valorTotal = document.getElementById("valor-total");
+
+  const pedido = JSON.parse(localStorage.getItem("pedido")) || [];
+  const total = localStorage.getItem("valorTotal") || "0.00";
+
+  pedido.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+    lista.appendChild(li);
+  });
+
+  valorTotal.textContent = total;
+});
+</script>
+
+  
+</body>
+</html>
