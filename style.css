@@ -198,3 +198,575 @@ body.fundo-marrom {
 .btn-verde:hover {
   background-color: #228b22;
 }
+
+
+/* agora vaiperfil.css */
+body.bg-gray-100 {
+  background-color: #a0522d; /* fundo marrom */
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+.caixa-perfil {
+  background-color: #f3d9d9; /* caixa clara */
+  border-radius: 15px;
+  width: 700px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 3px solid purple;
+}
+
+.titulo-laranja {
+  color: #ff4500;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.perfil-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.dados {
+  text-align: left;
+}
+
+.dados label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.dados input {
+  width: 250px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.foto {
+  display: flex;
+  flex-direction: column; /* coloca os elementos em coluna */
+  align-items: center;    /* centraliza horizontalmente */
+  margin-bottom: 20px;
+}
+
+.foto img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+  margin-bottom: 10px; /* espaço entre a foto e o botão */
+}
+
+.btn-laranja {
+  background-color: #ff7f50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-laranja:hover {
+  background-color: #ff4500;
+}
+
+.btn-verde {
+  background-color: #00cc00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px 10px 0 0;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-laranja {
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.nome-arquivo {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #333;
+  font-style: italic;
+}
+/* home estilo   */
+body {
+  background-color: black;
+  color: rgb(190, 24, 24);
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+header h1 {
+  color: red;
+  font-size: 40px;
+  text-shadow: 1px 1px rgb(143, 33, 95);
+  margin: 20px 0;
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  max-width: 800px;
+}
+
+.video-container video {
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  width: 100%;
+  height: auto;
+}
+
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  background-color: rgb(207, 27, 27);
+  color: black;
+  padding: 10px;
+}
+
+nav ul li {
+  margin: 0 20px;
+}
+
+nav button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-radius: 20px;
+  margin: 20px auto;
+  width: 80%;
+  padding: 20px;
+}
+
+.item {
+  margin: 10px;
+}
+
+.item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.item p {
+  color: black;
+  font-weight: bold;
+}
+
+.hamburguer-destaque img {
+  width: 300px;
+  border-radius: 50%;
+  margin-top: 20px;
+}
+/*pizza*/
+body {
+  font-family: Arial, sans-serif;
+  background: #fdf3e7;
+  text-align: center;
+}
+
+h1 {
+  color: #d35400;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  
+  align-items: stretch; /* força as colunas a terem a mesma altura */
+}
+
+.coluna {
+  background: #181716;
+  padding: 15px;
+  border-radius: 8px;
+  width: 25%;
+}
+
+.coluna label {
+  display: block;
+  margin: 8px 0;
+  color: #fff;
+}
+
+.extras {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px;
+  background: #ffe0b2;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.extras label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.extras input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+.extras img {
+  width: 35px;
+  height: 35px;
+  margin-right: 6px;
+  transition: transform 0.2s;
+}
+
+.extras img:hover {
+  transform: scale(1.2);
+}
+
+.pedido {
+  margin: 20px;
+  padding: 15px;
+  background: #f5cba7;
+  border-radius: 8px;
+}
+
+button {
+  background: #e67e22;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #d35400;
+}
+ /*acai*/
+ *pizza*/
+body {
+  font-family: Arial, sans-serif;
+  background: #fdf3e7;
+  text-align: center;
+}
+
+h1 {
+  color: #d35400;
+}
+
+.menu {
+  display: flex;          /* coloca as colunas lado a lado */
+  gap: 20px;              /* espaço entre elas */
+  justify-content: center;/* centraliza na tela */
+  
+}
+
+.coluna {
+  flex: 1;                /* cada coluna ocupa metade */
+  background: #d73030;    /* cor de fundo */
+  padding: 15px;
+  border-radius: 8px;
+}
+
+
+.coluna label {
+  display: block;
+  margin: 8px 0;
+  color: #fff;
+}
+
+.extras {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px;
+  background: #ffe0b2;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.extras label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.extras input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+.extras img {
+  width: 35px;
+  height: 35px;
+  margin-right: 6px;
+  transition: transform 0.2s;
+}
+
+.extras img:hover {
+  transform: scale(1.2);
+}
+
+.pedido {
+  margin: 20px;
+  padding: 15px;
+  background: #f5cba7;
+  border-radius: 8px;
+}
+
+button {
+  background: #e67e22;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #d35400;
+}
+
+
+/*bebidas*/
+
+body {
+  font-family: Arial, sans-serif;
+  background: #fdf3e7;
+  text-align: center;
+}
+
+h1 {
+  color: #d35400;
+}
+
+.menu {
+  display: flex;          /* coloca as colunas lado a lado */
+  gap: 20px;              /* espaço entre elas */
+  justify-content: center;/* centraliza na tela */
+  
+}
+
+.coluna {
+  flex: 1;                /* cada coluna ocupa metade */
+  background: #d73030;    /* cor de fundo */
+  padding: 15px;
+  border-radius: 8px;
+}
+
+
+.coluna label {
+  display: block;
+  margin: 8px 0;
+  color: #fff;
+}
+
+.extras {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px;
+  background: #ffe0b2;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.extras label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.extras input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+.extras img {
+  width: 35px;
+  height: 35px;
+  margin-right: 6px;
+  transition: transform 0.2s;
+}
+
+.extras img:hover {
+  transform: scale(1.2);
+}
+
+.pedido {
+  margin: 20px;
+  padding: 15px;
+  background: #f5cba7;
+  border-radius: 8px;
+}
+
+button {
+  background: #e67e22;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #d35400;
+}
+
+/*carrinho*/body {
+  font-family: Arial, sans-serif;
+  background-color: #a0522d; /* fundo marrom */
+  color: rgb(22, 17, 17);
+  text-align: center;
+}
+
+/* Caixa de status */
+.status {
+  margin: 20px;
+  padding: 15px;
+  background-color: #f3d9d9; /* caixa clara */
+  border-radius: 15px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid purple;
+}
+
+.status h2 {
+  color: #ff4500;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.status p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* Caixas de pedido e pagamento */
+.pedido, .pagamento {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  width: 450px;
+  border: 2px solid #444;
+  text-align: left;
+}
+
+.pedido h2, .pagamento h2 {
+  color: #333;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* Lista de itens */
+#lista-itens {
+  list-style: none;
+  padding: 0;
+}
+
+#lista-itens li {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+/* Botão confirmar */
+#confirmar {
+  margin-top: 30px; /* afasta do conteúdo */
+  padding: 12px 25px;
+  font-size: 18px;
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#confirmar:hover {
+  background-color: #e03e00;
+}
+/* Perfil da loja */
+body.fundo-marrom {
+  font-family: Arial, sans-serif;
+  background-color: #a0522d; /* fundo marrom */
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.perfil-loja {
+  background-color: #f9f9f9;
+  color: #333;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.titulo-laranja {
+  color: #ff4500;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.descricao {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.info-loja p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.redes-sociais {
+  margin-top: 20px;
+}
+
+.redes-sociais h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #ff4500;
+}
+
+.redes-sociais a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  margin: 0 8px;
+}
+
+.redes-sociais a:hover {
+  color: #ff4500;
+}
