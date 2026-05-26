@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bebidas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> Sucos, refrigerantes e águas 🥤</h1>
+<div class="menu">
+  <!-- Coluna 1 -->
+  <div class="coluna">
+    <h2>Sucos</h2>
+    <label><input type="checkbox" name="bebida" value="Suco Laranja 500ml" data-preco="7"> Laranja 500ml - R$ 7,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Laranja 1L" data-preco="14"> Laranja 1L - R$ 14,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Cupuaçu 500ml" data-preco="8"> Cupuaçu 500ml - R$ 8,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Cupuaçu 1L" data-preco="16"> Cupuaçu 1L - R$ 16,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Acerola 500ml" data-preco="8"> Acerola 500ml - R$ 8,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Acerola 1L" data-preco="16"> Acerola 1L - R$ 16,00</label>
+  </div>
+
+  <!-- Coluna 2 -->
+  <div class="coluna">
+    <h2>Combos</h2>
+    <label><input type="checkbox" name="bebida" value="Suco Maracujá 500ml" data-preco="7"> Maracujá 500ml - R$ 7,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Maracujá 1L" data-preco="14"> Maracujá 1L - R$ 14,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Abacaxi 500ml" data-preco="7"> Abacaxi 500ml - R$ 7,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Abacaxi 1L" data-preco="14"> Abacaxi 1L - R$ 14,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Goiaba 500ml" data-preco="7"> Goiaba 500ml - R$ 7,00</label>
+    <label><input type="checkbox" name="bebida" value="Suco Goiaba 1L" data-preco="14"> Goiaba 1L - R$ 14,00</label>
+  </div>
+</div>
+
+<!-- Outras opções -->
+<div class="extras">
+  <h2>Outras Bebidas</h2>
+
+  <label>
+    <input type="checkbox" value="Água sem gás" data-preco="4">
+    <img src="imagens/agua.jpg" > Água sem gás - R$ 4,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Água com gás" data-preco="5">
+    <img src="imagens/agua.jpg" > Água com gás - R$ 5,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Leite" data-preco="2">
+    <img src="imagens/leite.jpg"> Leite - R$ 2,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Coca-Cola" data-preco="7">
+    <img src="imagens/coca.jpg" > Coca-Cola - R$ 7,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Refrigerante Laranja" data-preco="7">
+    <img src="imagens/coca.jpg" > Refrigerante Laranja - R$ 7,00
+  </label>
+
+  <label>
+    <input type="checkbox" value="Refrigerante Limão" data-preco="7">
+    <img src="imagens/limao.jpg" > Refrigerante Limão - R$ 7,00
+  </label>
+</div>
+
+<!-- Quantidade e Total -->
+<div class="pedido">
+  <label>Quantidade: <input type="number" id="quantidade" value="1" min="1"></label>
+  <p>Total: R$ <span id="total">0</span></p>
+  <button id="enviar">Enviar Compra</button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        total += parseFloat(chk.dataset.preco);
+        quantidade++;
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+  });
+});
+</script>
+
+<!--codigo novo-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    // Salva no LocalStorage sempre que atualizar
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+    // Redireciona para o carrinho
+    window.location.href = "carrinho.html";
+  });
+});
+</script>
+</body>
+</html>
