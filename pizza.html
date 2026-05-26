@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizzaria Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> Pizzas</h1>
+<div class="menu">
+  <!-- Família -->
+  <div class="coluna">
+    <h2>Tamanho Família</h2>
+    <label><input type="checkbox" name="pizza" value="Calabresa GG" data-preco="75"> Calabresa GG - R$ 75,00</label>
+    <label><input type="checkbox" name="pizza" value="Portuguesa GG" data-preco="75"> Portuguesa GG - R$ 75,00</label>
+    <label><input type="checkbox" name="pizza" value="Moda da Casa GG" data-preco="75"> Moda da Casa GG - R$ 75,00</label>
+  </div>
+
+  <!-- Médio -->
+  <div class="coluna">
+    <h2>Tamanho Médio</h2>
+    <label><input type="checkbox" name="pizza" value="Calabresa M" data-preco="50"> Calabresa M - R$ 50,00</label>
+    <label><input type="checkbox" name="pizza" value="Portuguesa M" data-preco="50"> Portuguesa M - R$ 50,00</label>
+    <label><input type="checkbox" name="pizza" value="Moda da Casa M" data-preco="50"> Moda da Casa M - R$ 50,00</label>
+  </div>
+
+  <!-- Pequeno -->
+  <div class="coluna">
+    <h2>Tamanho Pequeno</h2>
+    <label><input type="checkbox" name="pizza" value="Calabresa P" data-preco="50"> Calabresa P - R$ 50,00</label>
+    <label><input type="checkbox" name="pizza" value="Portuguesa P" data-preco="50"> Portuguesa P - R$ 50,00</label>
+    <label><input type="checkbox" name="pizza" value="Moda da Casa P" data-preco="50"> Moda da Casa P - R$ 50,00</label>
+  </div>
+</div>
+
+
+ <div class="extras">
+  <h2>Adicionais (+ R$ 2,00 cada)</h2>
+
+  <label>
+    <input type="checkbox" value="Tomate" data-preco="2">
+    <img src="imagens/tomate.jpg" alt="Tomate"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Milho" data-preco="2">
+    <img src="imagens/milho.jpg" alt="Milho"> 
+  </label>
+
+  <label>
+    <input type="checkbox" value="Presunto" data-preco="2">
+    <img src="imagens/presunto.jpg" alt="Presunto">
+  </label>
+
+  <label>
+    <input type="checkbox" value="Queijo" data-preco="2">
+    <img src="imagens/queijo.jpg" alt="Queijo"> 
+  </label>
+</div>
+
+
+  <!-- Quantidade e Total -->
+  <div class="pedido">
+    <label>Quantidade: <input type="number" id="quantidade" value="1" min="1"></label>
+    <p>Total: R$ <span id="total">0</span></p>
+    <button id="enviar"  onclick="window.location='carrinho.html'">Enviar Compra</button>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        total += parseFloat(chk.dataset.preco);
+        quantidade++;
+      }
+    });
+
+    // Atualiza os campos
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+  }
+
+  // Atualiza sempre que marcar/desmarcar
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  // Inicializa
+  atualizarPedido();
+
+  // Botão enviar
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+  });
+});
+</script>
+<script>
+// Lógica para mostrar/ocultar áreas de pagamento
+    document.querySelectorAll('input[name="pagamento"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.getElementById('pix-area').style.display = radio.value === 'pix' ? 'block' : 'none';
+        document.getElementById('dinheiro-area').style.display = radio.value === 'dinheiro' ? 'block' : 'none';
+      });
+    });
+  </script> 
+
+<!---codigo--->
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const totalSpan = document.getElementById("total");
+  const quantidadeInput = document.getElementById("quantidade");
+
+  function atualizarPedido() {
+    let total = 0;
+    let quantidade = 0;
+    const itens = [];
+
+    checkboxes.forEach(chk => {
+      if (chk.checked) {
+        const nome = chk.value;
+        const preco = parseFloat(chk.dataset.preco);
+        total += preco;
+        quantidade++;
+        itens.push({nome, preco});
+      }
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+    quantidadeInput.value = quantidade;
+
+    // Salva no LocalStorage sempre que atualizar
+    localStorage.setItem("pedido", JSON.stringify(itens));
+    localStorage.setItem("valorTotal", total.toFixed(2));
+  }
+
+  checkboxes.forEach(chk => {
+    chk.addEventListener("change", atualizarPedido);
+  });
+
+  atualizarPedido();
+
+  document.getElementById("enviar").addEventListener("click", () => {
+    alert("✅ Pedido enviado!\nQuantidade: " + quantidadeInput.value + "\nTotal: R$ " + totalSpan.textContent);
+    // Redireciona para o carrinho
+    window.location.href = "carrinho.html";
+  });
+});
+</script>
+
+</body>
+</html>
