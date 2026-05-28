@@ -6,7 +6,7 @@
 }
 
 .imagem-inicio {
-  width: 400px;              /* tamanho da imagem */
+  width: 600px;              /* tamanho da imagem */
   border-radius: 10px;       /* cantos arredondados */
   border: 3px solid purple;  /* borda roxa */
   margin-bottom: 70px;  
@@ -748,6 +748,10 @@ body.fundo-marrom {
   text-align: center;
   margin: 0;
   padding: 0;
+   display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* altura mínima da tela */
+  
 }
 
 .perfil-loja {
@@ -775,9 +779,32 @@ body.fundo-marrom {
   font-size: 16px;
   margin: 8px 0;
 }
+.espaco {
+   background-color: #f9f9f9;
+  color: #333;
+  max-width: 450px;
+  margin: 20px auto;
+  padding: 2px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.foto-equipe {
 
-.redes-sociais {
-  margin-top: 20px;
+  width: 250px;              /* tamanho da imagem */
+  border-radius: 10px;       /* cantos arredondados */
+  border: 3px solid purple;  /* borda roxa */
+  margin-bottom: 70px;  
+  align-items: center;    /* centraliza horizontalmente */
+  margin-bottom: 20px;  /* espaço entre imagem e botão */
+}
+.foto-pro {
+
+  width: 150px;              /* tamanho da imagem */
+  border-radius: 10px;       /* cantos arredondados */
+  border: 3px solid purple;  /* borda roxa */
+  margin-bottom: 70px;  
+  align-items: center;    /* centraliza horizontalmente */
+  margin-bottom: 20px;  /* espaço entre imagem e botão */
 }
 
 .redes-sociais h2 {
@@ -795,4 +822,21 @@ body.fundo-marrom {
 
 .redes-sociais a:hover {
   color: #ff4500;
+}
+.redes-sociais {
+  margin-top: 50px;
+}
+.rodape {
+  text-align: center;       /* Centraliza o texto */
+  margin-top: 10px;         /* Espaço acima do rodapé */
+  padding: 10px;            /* Espaçamento interno */
+  background-color: #0de153; /* Exemplo de cor de fundo (marrom) */
+  color: #fff;              /* Cor do texto */
+  position: relative;       /* Mantém o rodapé dentro do fluxo normal */
+}
+
+.descricao-rodape {
+  margin: 0;                /* Remove margens extras */
+  font-size: 20px;         /* Tamanho da fonte */
+
 }
